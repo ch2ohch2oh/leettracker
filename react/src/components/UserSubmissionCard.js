@@ -3,7 +3,7 @@ import Paper from "@material-ui/core/Paper";
 
 import { DataGrid } from "@material-ui/data-grid";
 
-export default function UserSubmissionCard({ subs }) {
+export default function UserSubmissionCard({ subs, showUsername }) {
   if (!subs) {
     return <Paper>Loading</Paper>;
   } else {
@@ -11,13 +11,24 @@ export default function UserSubmissionCard({ subs }) {
     const len = subs.length || 0;
     for (let i = 0; i < len; i++) {
       subs[i].id = subs[i].timestamp;
+      // Covert time to local timezone
+      console.log(subs[i].timestamp);
+      subs[i].timestamp = new Date(subs[i].timestamp + "Z");
     }
+
     const columns = [
       { field: "title", headerName: "Title", width: 500 },
       { field: "lang", headerName: "Language", width: 150 },
       { field: "status", headerName: "Status", width: 200 },
-      { field: "timestamp", headerName: "Time", width: 200 },
+      { field: "timestamp", headerName: "Time", width: 200, type: "dateTime" },
     ];
+    if (showUsername) {
+      columns.unshift({
+        field: "username",
+        headerName: "Username",
+        width: 150,
+      });
+    }
     return (
       <Paper>
         {console.log(subs)}

@@ -17,14 +17,7 @@ import UserProfileCard from "./UserProfileCard";
 import UserSubmissionCard from "./UserSubmissionCard";
 import SimpleAppBar from "./SimpleAppBar";
 
-const getUserInfo = async (uname) => {
-  return await fetch("/api/v1/user/" + uname)
-    .then((res) => (res.ok ? res.json() : null))
-    .then((data) => {
-      console.log("getUserInfo:", data);
-      return data;
-    });
-};
+import { getUserInfo } from "../api";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -51,25 +44,15 @@ export default function UserProfilePage() {
   }, []);
 
   return (
-    <Container maxWidth="lg">
-      <CssBaseline />
-      <SimpleAppBar />
-      <Box my={15}>
-        <Grid
-          container
-          spacing={2}
-          direction="column"
-          // justify="center"
-          style={{ minHeight: "", paddingTop: "20" }}
-        >
-          <Grid item>
-            <UserProfileCard username={username} profile={userInfo.profile} />
-          </Grid>
-          <Grid item>
-            <UserSubmissionCard subs={userInfo.submissions} />
-          </Grid>
+    <Box my={15}>
+      <Grid container spacing={2} direction="column">
+        <Grid item>
+          <UserProfileCard username={username} profile={userInfo.profile} />
         </Grid>
-      </Box>
-    </Container>
+        <Grid item>
+          <UserSubmissionCard subs={userInfo.submissions} />
+        </Grid>
+      </Grid>
+    </Box>
   );
 }

@@ -10,7 +10,7 @@ import Grid from "@material-ui/core/Grid";
 
 import { makeStyles } from "@material-ui/core/styles";
 
-import { getRandomUser } from "../api";
+import { getRandomUser, getUserInfo } from "../api";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -65,10 +65,9 @@ export default function UserSearchForm() {
       e.preventDefault();
     }
     const username = getUsername();
-    return fetch("/api/v1/user/" + username + "/info")
-      .then((res) => {
-        if (res.ok) {
-          const data = res.json();
+    return getUserInfo(username)
+      .then((data) => {
+        if (data) {
           console.log("Redirect to", username);
           history.push("/user/" + username);
         } else {
