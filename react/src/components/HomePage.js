@@ -16,31 +16,30 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function UserSearchPage() {
+export default function HomePage() {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
-      <CssBaseline />
-      <SimpleAppBar />
-      <Container maxWidth="md">
-        <Grid
-          container
-          spacing={2}
-          direction="column"
-          justify="center"
-          style={{ minHeight: "100vh", margin: "auto" }}
-        >
-          <Grid item>
-            <Typography component="h1" variant="h2" align="center">
-              Leetcode Tracker
-            </Typography>
-          </Grid>
-          <Grid item>
-            <UserSearchForm />
-          </Grid>
+      {/* <SimpleAppBar /> */}
+      {/* <Container maxWidth="md"> */}
+      <Grid
+        container
+        spacing={2}
+        direction="column"
+        justify="center"
+        style={{ minHeight: "100vh", margin: "auto" }}
+      >
+        <Grid item>
+          <Typography component="h1" variant="h2" align="center">
+            Leetcode Tracker
+          </Typography>
         </Grid>
-      </Container>
+        <Grid item>
+          <UserSearchForm />
+        </Grid>
+      </Grid>
+      {/* </Container> */}
     </div>
   );
 }
