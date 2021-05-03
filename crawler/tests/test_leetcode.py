@@ -23,7 +23,7 @@ def test_get_user_submissions():
     fields = ['title', 'title_slug', 'timestamp', 'status', 'lang']
     for f in fields:
         assert f in data[0].keys()
-    assert isinstance(data[0]['timestamp'], datetime)
+    assert isinstance(data[0]['timestamp'], int)
 
 def test_get_user_submissions_limit():
     username = 'drcru'
@@ -51,4 +51,4 @@ def test_get_problems():
 def test_get_active_users():
     users = leetcode.get_active_users(1367, first=10)
     assert users and len(users) == 10
-    assert isinstance(users[0]['date'], datetime)
+    assert isinstance(users[0]['date'], int)

@@ -30,7 +30,7 @@ def get_user_submissions(username, limit=20):
                         {'username': username, 'limit': limit})
         data = data.get('data').get('recentSubmissionList')
         for entry in data:
-            entry['timestamp'] = datetime.fromtimestamp(int(entry['timestamp']))
+            entry['timestamp'] = int(entry['timestamp'])
             _rename_key(entry, 'titleSlug', 'title_slug')
             _rename_key(entry, 'statusDisplay', 'status')
         return data
@@ -53,7 +53,7 @@ def get_active_users(question_id, first=20):
         for e in data:
             users.append({
                 'username': e['node']['post']['author']['username'],
-                'date': datetime.fromtimestamp(int(e['node']['post']['creationDate']))
+                'date': int(e['node']['post']['creationDate'])
             })
         return users
     except:
