@@ -1,0 +1,38 @@
+version: "2"
+
+services:
+  mongo:
+    image: mongo:3.6-xenial
+    restart: always
+    ports:
+      - "8001:27017"
+    volumes:
+      - dbdata:/data/db
+  crawler:
+    build:
+      context: ./crawler
+    restart: always
+    image: gcr.io/leettracker/crawler
+    depends_on:
+      - mongo
+    environment:
+      - DB_HOST=mongo
+  apiserver:
+    build:
+      context: ./apiserver
+    restart: always
+    image: gcr.io/leettracker/apiserver
+    environment:
+      - DB_HOST=mongo
+  react:
+    build:
+      context: ./react
+    restart: always
+    ports:
+      - "80:80"
+    image: gcr.io/leettracker/react
+    depends_on:
+      - apiserver
+
+volumes:
+  dbdata:
