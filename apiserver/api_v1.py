@@ -9,8 +9,9 @@ router = APIRouter(prefix="/api/v1")
 @router.get('/user/{username}')
 def get_user_digest(username: str, limit: int=20):
     data = db.get_user_info(username)
+    # Trigger an update for the user whenever he visits
+    db.push_pending_user(username)
     if not data:
-        db.push_pending_user(username)
         raise HTTPException(status_code=404, detail=f"User not found(username={username})")
     data['submissions'] =  db.get_recent_submissions(username, limit)
     return data
