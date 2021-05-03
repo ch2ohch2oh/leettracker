@@ -17,6 +17,7 @@ services:
       - mongo
     environment:
       - DB_HOST=mongo
+      - DB_NAME=lc
   apiserver:
     build:
       context: ./apiserver
@@ -24,6 +25,7 @@ services:
     image: gcr.io/leettracker/apiserver
     environment:
       - DB_HOST=mongo
+      - DB_NAME=lc
   react:
     build:
       context: ./react
