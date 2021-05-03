@@ -11,9 +11,9 @@ export default function UserSubmissionCard({ subs, showUsername }) {
     const len = subs.length || 0;
     for (let i = 0; i < len; i++) {
       subs[i].id = subs[i].timestamp;
-      // Covert time to local timezone
+      // Covert epoch to local datetime
       console.log(subs[i].timestamp);
-      subs[i].timestamp = new Date(subs[i].timestamp + "Z");
+      subs[i].timestamp = new Date(parseInt(subs[i].timestamp) * 1000);
     }
 
     const columns = [
