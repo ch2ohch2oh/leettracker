@@ -1,5 +1,6 @@
 import React from "react";
 import Paper from "@material-ui/core/Paper";
+import Box from "@material-ui/core/Box";
 
 import { DataGrid } from "@material-ui/data-grid";
 import { Link } from "react-router-dom";
@@ -41,7 +42,18 @@ export default function UserSubmissionCard({ subs, showUsername }) {
     const columns = [
       { field: "title", headerName: "Title", width: 500 },
       { field: "lang", headerName: "Language", width: 150 },
-      { field: "status", headerName: "Status", width: 200 },
+      {
+        field: "status",
+        headerName: "Status",
+        width: 200,
+        renderCell: (param) => {
+          if (param.value.toLowerCase() === "accepted") {
+            return <Box color="success.main">{param.value}</Box>;
+          } else {
+            return <Box color="error.main">{param.value}</Box>;
+          }
+        },
+      },
       { field: "time", headerName: "Time", width: 200 },
     ];
     if (showUsername) {
