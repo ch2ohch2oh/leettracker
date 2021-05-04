@@ -11,7 +11,7 @@ thread = threading.Thread(target=polling)
 thread.start()
 
 schedule.every().day.do(update.update_problems)
-schedule.every(6).hours.do(update.update_active_users)
+schedule.every().hour.do(update.update_active_users)
 
 update.update_problems()
 update.update_active_users()
