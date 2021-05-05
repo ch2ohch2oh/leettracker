@@ -5,6 +5,8 @@ import Box from "@material-ui/core/Box";
 import { DataGrid } from "@material-ui/data-grid";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
+import { Typography } from "@material-ui/core";
+import LoadingMessage from "./LoadingMessage";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,7 +28,7 @@ export default function UserSubmissionCard({ subs, showUsername }) {
   const classes = useStyles();
 
   if (!subs) {
-    return <Paper>Loading</Paper>;
+    return <LoadingMessage msg="Loading user submissions" />;
   } else {
     // console.log("add ids:", subs);
     const len = subs.length || 0;
